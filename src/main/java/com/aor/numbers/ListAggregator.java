@@ -25,7 +25,7 @@ public class ListAggregator {
      * @return The maximum value in the list.
      */
     public Integer max(List<Integer> list) {
-        int max = 0;
+        int max = list.get(0);
 
         for (Integer number : list)
             if (number > max)
@@ -55,7 +55,7 @@ public class ListAggregator {
     public int distinct(List<Integer> list) {
         ListDeduplicator deduplicator = new ListDeduplicator();
         List<Integer> distinct = deduplicator.deduplicate(list);
-
         return distinct.size();
     }
+
 }
