@@ -34,6 +34,15 @@ public class ListAggregatorTest {
     }
 
     @Test
+    public void pitest_1() {
+        List<Integer> list = Arrays.asList(5, 8, 8, 10, 10, 7);
+        ListAggregator aggregator = new ListAggregator();
+        int max = aggregator.max(list);
+
+        Assertions.assertEquals(10, max);
+    }
+
+    @Test
     public void min() {
 
         ListAggregator aggregator = new ListAggregator();
