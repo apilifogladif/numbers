@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+//import org.mockito.Mockito;
+
 public class ListAggregatorTest {
     public List<Integer> list;
     @BeforeEach
@@ -42,9 +44,15 @@ public class ListAggregatorTest {
 
     @Test
     public void distinct() {
-
+        class stubdistinct implements GenericListDeduplicator {
+            @Override
+            public List<Integer> deduplicate(List<Integer> list) {
+                return Arrays.asList(1, 2, 4, 5);
+            }
+        }
+        GenericListDeduplicator stub = new stubdistinct();
         ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(list);
+        int distinct = aggregator.distinct(list, stub);
 
         Assertions.assertEquals(4, distinct);
     }
@@ -61,30 +69,18 @@ public class ListAggregatorTest {
 
     @Test
     public void bug_8726() {
-
+        class stubdistinct implements GenericListDeduplicator {
+            @Override
+            public List<Integer> deduplicate(List<Integer> list) {
+                return Arrays.asList(1, 2, 4);
+            }
+        }
+        stubdistinct stub = new stubdistinct();
         list = Arrays.asList(1, 2, 4, 2);
         ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(list);
+        int distinct = aggregator.distinct(list, stub);
 
         Assertions.assertEquals(3, distinct);
     }
 
-    @Test
-    public void bug_8726_deduplicate() {
-
-        list = Arrays.asList(1, 2, 4, 2);
-        ListDeduplicator deduplicator = new ListDeduplicator();
-        List<Integer> deduplicated = deduplicator.deduplicate(list);
-        List<Integer> expected = Arrays.asList(1, 2, 4);
-        Assertions.assertEquals(expected, deduplicated);
-    }
-
-    @Test
-    public void bug_8726_sort() {
-
-        list = Arrays.asList(1, 2, 4, 2);
-        List<Integer> sorted = ListSorter.sort(list);
-        List<Integer> expected = Arrays.asList(1, 2, 2, 4);
-        Assertions.assertEquals(expected, sorted);
-    }
 }
