@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.aor.numbers.ListSorterTest" tests="2" skipped="0" failures="1" errors="0" timestamp="2023-10-20T22:18:49" hostname="DESKTOP-NKJJ79O" time="0.005">
+<testsuite name="com.aor.numbers.ListSorterTest" tests="2" skipped="0" failures="1" errors="0" timestamp="2023-10-20T22:29:43" hostname="DESKTOP-NKJJ79O" time="0.015">
   <properties/>
-  <testcase name="bug_8726_sort()" classname="com.aor.numbers.ListSorterTest" time="0.003">
+  <testcase name="bug_8726_sort()" classname="com.aor.numbers.ListSorterTest" time="0.014">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;[1, 2, 2, 4]&gt; but was: &lt;[1, 2, 4, 2]&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;[1, 2, 2, 4]&gt; but was: &lt;[1, 2, 4, 2]&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)

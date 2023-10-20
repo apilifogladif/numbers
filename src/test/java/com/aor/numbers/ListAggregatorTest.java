@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-//import org.mockito.Mockito;
+import org.mockito.Mockito;
 
 public class ListAggregatorTest {
     public List<Integer> list;
@@ -44,15 +44,10 @@ public class ListAggregatorTest {
 
     @Test
     public void distinct() {
-        class stubdistinct implements GenericListDeduplicator {
-            @Override
-            public List<Integer> deduplicate(List<Integer> list) {
-                return Arrays.asList(1, 2, 4, 5);
-            }
-        }
-        GenericListDeduplicator stub = new stubdistinct();
+        GenericListDeduplicator deduplicator = Mockito.mock(GenericListDeduplicator.class);
+        Mockito.when(deduplicator.deduplicate(Mockito.anyList())).thenReturn(Arrays.asList(1, 2, 4, 5));
         ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(list, stub);
+        int distinct = aggregator.distinct(list, deduplicator);
 
         Assertions.assertEquals(4, distinct);
     }
@@ -69,16 +64,11 @@ public class ListAggregatorTest {
 
     @Test
     public void bug_8726() {
-        class stubdistinct implements GenericListDeduplicator {
-            @Override
-            public List<Integer> deduplicate(List<Integer> list) {
-                return Arrays.asList(1, 2, 4);
-            }
-        }
-        stubdistinct stub = new stubdistinct();
         list = Arrays.asList(1, 2, 4, 2);
+        GenericListDeduplicator deduplicator = Mockito.mock(GenericListDeduplicator.class);
+        Mockito.when(deduplicator.deduplicate(Mockito.anyList())).thenReturn(Arrays.asList(1, 2, 4));
         ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(list, stub);
+        int distinct = aggregator.distinct(list, deduplicator);
 
         Assertions.assertEquals(3, distinct);
     }
