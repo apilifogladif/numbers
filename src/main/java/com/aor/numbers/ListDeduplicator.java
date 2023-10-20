@@ -18,7 +18,7 @@ public class ListDeduplicator {
 
 
     public List<Integer> deduplicate(List<Integer> list, GenericListSorter stub) {
-        List<Integer> sorted = ListSorter.sort(list);
+        List<Integer> sorted = stub.sort(list);
         List<Integer> unique = new ArrayList<>();
 
         Integer last = null;

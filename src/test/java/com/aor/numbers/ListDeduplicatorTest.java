@@ -13,7 +13,7 @@ public class ListDeduplicatorTest {
         class stubdeduplicate implements GenericListSorter {
             @Override
             public List<Integer> sort(List<Integer> list) {
-                return Arrays.asList(1, 2, 2, 4);
+                return Arrays.asList(1, 2, 2, 4, 5);
             }
         }
 
@@ -21,7 +21,6 @@ public class ListDeduplicatorTest {
         List<Integer> expected = Arrays.asList(1,2,4,5);
 
         stubdeduplicate stub = new stubdeduplicate();
-        List<Integer> sorted = stub.sort(list);
         ListDeduplicator aggregator = new ListDeduplicator();
         List<Integer> deduplicated = aggregator.deduplicate(list, stub);
 
