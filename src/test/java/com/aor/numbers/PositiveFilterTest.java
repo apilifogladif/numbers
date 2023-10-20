@@ -10,7 +10,7 @@ public class PositiveFilterTest {
     @Test
     public void positive() {
         PositiveFilter filter = new PositiveFilter();
-        Assertions.assertEquals(true, filter.accept(1));
+        Assertions.assertEquals(true, filter.accept(0));
         Assertions.assertEquals(true, filter.accept(10000000));
         Assertions.assertEquals(true, filter.accept(5000));
         Assertions.assertEquals(true, filter.accept(18));
